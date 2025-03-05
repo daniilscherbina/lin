@@ -3,6 +3,8 @@
 path=$(echo $PATH | tr ':' '\n' | sort | uniq)
 
 echo "$path" | while IFS= read -r line; do
-    count=$(find $line -maxdepth 1 -type f | wc -l)
-    echo "$line => $count"
+    if [ -d "$directory" ]; then
+        count=$(find $line -maxdepth 1 -type f | wc -l)
+        echo "$line => $count"
+    fi
 done
