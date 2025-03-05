@@ -17,10 +17,10 @@ case $planet_name in
         echo "2"
         ;;
     "Jupiter")
-        echo "92"
+        echo "98"
         ;;
     "Saturn")
-        echo "145"
+        echo "83"
         ;;
     "Uranus")
         echo "27"
