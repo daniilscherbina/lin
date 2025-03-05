@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-planet_name="$1"
+planet_name=$1
 
-case "$planet_name" in
+case $planet_name in
     "Mercury")
         echo "0"
         ;;
