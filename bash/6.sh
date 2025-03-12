@@ -8,7 +8,7 @@ count=0
 while [ -z "$(ls -A .)" ]; do
     sleep 1
     count=$(($count+1))
-    if [ $count -eq 10 ]; then
+    if [ $count -eq 100 ]; then
         exit 1
     fi
 done
