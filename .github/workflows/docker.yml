@@ -17,7 +17,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
       - name: Build images
         run: |
-          docker build -t app:latest .
+          docker build -t app:latest .\docker
 
   test:
     runs-on: ubuntu-latest
