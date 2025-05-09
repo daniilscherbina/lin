@@ -7,7 +7,7 @@ COPY src ./src
 COPY tests ./tests
 
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir .
+    pip install --no-cache-dir . pytest
 
 FROM python:3.9-slim
 
