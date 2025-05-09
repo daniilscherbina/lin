@@ -28,10 +28,10 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: kubsu
-          POSTGRES_PASSWORD: kubsu
-          POSTGRES_PORT: 5432
-          POSTGRES_USER: kubsu
+          POSTGRES_DB: ${{ secrets.TEST_DB_NAME }}
+          POSTGRES_USER: ${{ secrets.TEST_DB_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+          POSTGRES_PORT: ${{ secrets.TEST_DB_PORT }}
         ports:
           - 5432:5432
     steps:

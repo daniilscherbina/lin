@@ -13,7 +13,7 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY --from=builder /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+COPY --from=builder /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
 COPY --from=builder /app/src /app/src
 
 EXPOSE 8083
