@@ -6,7 +6,7 @@ COPY pyproject.toml ./
 COPY src ./src
 COPY tests ./tests
 
-RUN make pip install .
+RUN pip install .
 
 FROM python:3.9-slim
 
