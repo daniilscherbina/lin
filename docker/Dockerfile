@@ -6,9 +6,8 @@ COPY pyproject.toml ./
 COPY src ./src
 COPY tests ./tests
 
-RUN pip install --no-cache-dir --upgrade pip
-
-RUN pip install --no-cache-dir .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir .
 
 FROM python:3.9-slim
 
