@@ -29,14 +29,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     needs: [ build ]
-    container:
-      image: app:latest
-      env:
-        DB_HOST: ${{ secrets.TEST_DB_HOST }}
-        DB_PORT: ${{ secrets.TEST_DB_PORT }}
-        DB_NAME: ${{ secrets.TEST_DB_NAME }}
-        DB_USER: ${{ secrets.TEST_DB_USER }}
-        DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
     services:
       postgres:
         image: postgres:latest
@@ -48,8 +40,24 @@ jobs:
         ports:
           - 5432:5432
     steps:
+      - name: Download Docker image
+        uses: actions/download-artifact@v3
+        with:
+          name: app-image
+          
+      - name: Load Docker image
+        run: docker load -i app-image.tar
+      
       - name: Run tests
-        run: pytest docker/tests/
+        run: |
+          docker run --network host \
+            -e DB_HOST=${{ secrets.TEST_DB_HOST }} \
+            -e DB_PORT=${{ secrets.TEST_DB_PORT }} \
+            -e DB_NAME=${{ secrets.TEST_DB_NAME }} \
+            -e DB_USER=${{ secrets.TEST_DB_USER }} \
+            -e DB_PASSWORD=${{ secrets.TEST_DB_PASSWORD }} \
+            app:latest \
+            pytest /app/tests/
 
   deploy:
     runs-on: ubuntu-latest
