@@ -2,11 +2,11 @@ FROM python:3.9-slim as builder
 
 WORKDIR /app
 
-COPY pyproject.toml Makefile ./
+COPY pyproject.toml ./
 COPY src ./src
 COPY tests ./tests
 
-RUN make install-dev
+RUN make pip install .
 
 FROM python:3.9-slim
 
