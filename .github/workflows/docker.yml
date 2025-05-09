@@ -20,6 +20,12 @@ jobs:
           docker build -t app:latest ./docker/
           docker save -o app-image.tar app:latest
 
+      - name: Upload Docker image
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-image
+          path: app-image.tar
+
   test:
     runs-on: ubuntu-latest
     needs: [ build ]
