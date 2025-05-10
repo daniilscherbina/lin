@@ -25,7 +25,6 @@ WORKDIR /app
 COPY --from=test-builder /root/.local /root/.local
 COPY --from=test-builder /app/src ./src
 COPY --from=test-builder /app/tests ./tests
-COPY --from=test-builder /app/conftest.py ./
 
 ENV PATH=/root/.local/bin:$PATH
 ENV PYTHONPATH=/app
