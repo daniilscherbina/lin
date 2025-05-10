@@ -62,6 +62,7 @@ jobs:
         ports:
           - 5432:5432
     steps:
+      - run: ls -la
       - name: Run tests
         working-directory: /app
         run: pytest tests
