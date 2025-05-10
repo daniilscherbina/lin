@@ -23,7 +23,7 @@ jobs:
       - name: Build and push production image
         uses: docker/build-push-action@v6.7.0
         with:
-          context: .
+          context: ./docker
           file: Dockerfile
           target: production
           push: true
@@ -34,7 +34,7 @@ jobs:
       - name: Build and push test image
         uses: docker/build-push-action@v6.7.0
         with:
-          context: .
+          context: ./docker
           file: Dockerfile
           target: test
           push: true
