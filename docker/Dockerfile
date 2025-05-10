@@ -14,7 +14,6 @@ FROM base-builder as test-builder
 
 COPY tests ./tests
 
-RUN pip install pytest
 RUN pip install --user .[test]
 
 
@@ -31,7 +30,8 @@ COPY --from=test-builder /app/tests ./tests
 ENV PATH=/root/.local/bin:$PATH
 ENV PYTHONPATH=/app
 
-
+EXPOSE 8083
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8083"]
 
 
 
