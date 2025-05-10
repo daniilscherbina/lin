@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Login to docker hub
-        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "deploy320" --password-stdin
+        run: docker login -u deploy320 -p ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Setup docker buildx
         uses: docker/setup-buildx-action@v3.6.1
