@@ -14,7 +14,9 @@ FROM base-builder as test-builder
 
 COPY tests ./tests
 
+RUN pip install pytest
 RUN pip install --user .[test]
+
 
 
 
@@ -29,7 +31,6 @@ COPY --from=test-builder /app/tests ./tests
 ENV PATH=/root/.local/bin:$PATH
 ENV PYTHONPATH=/app
 
-CMD ["pytest", "tests/"]
 
 
 
