@@ -65,7 +65,7 @@ jobs:
       - run: ls -la
       - name: Run tests
         working-directory: /app
-        run: pytest tests
+        run: pytest -v ./tests/
 
   deploy:
     runs-on: ubuntu-latest
