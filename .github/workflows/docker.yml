@@ -13,22 +13,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      - name: Build images
-        run: |
-          docker build -t app:latest ./docker/
-          docker save -o app-image.tar app:latest
 
-      - name: Upload Docker image
-        uses: actions/upload-artifact@v4
+      - name: Login to docker hub
+        uses: docker/login-action@v3.3.0
         with:
-          name: app-image
-          path: app-image.tar
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Setup docker buildx
+        uses: docker/setup-buildx-action@v3.6.1
+
+      - name: Build and push docker image
+        uses: docker/build-push-action@v6.7.0
+        with:
+          context: ./docker
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/app:latest-${{ github.sha }}
 
   test:
     runs-on: ubuntu-latest
     needs: [ build ]
+    container:
+      image: ${{ secrets.DOCKERHUB_USERNAME }}/app:latest-${{ github.sha }}
+    env:
+      DB_HOST: ${{ secrets.TEST_DB_HOST }}
+      DB_PORT: ${{ secrets.TEST_DB_PORT }}
+      DB_NAME: ${{ secrets.TEST_DB_NAME }}
+      DB_USER: ${{ secrets.TEST_DB_USER }}
+      DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
     services:
       postgres:
         image: postgres:latest
@@ -40,24 +52,9 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - name: Download Docker image
-        uses: actions/download-artifact@v4
-        with:
-          name: app-image
-          
-      - name: Load Docker image
-        run: docker load -i app-image.tar
-      
       - name: Run tests
-        run: |
-          docker run --network host \
-            -e DB_HOST=${{ secrets.TEST_DB_HOST }} \
-            -e DB_PORT=${{ secrets.TEST_DB_PORT }} \
-            -e DB_NAME=${{ secrets.TEST_DB_NAME }} \
-            -e DB_USER=${{ secrets.TEST_DB_USER }} \
-            -e DB_PASSWORD=${{ secrets.TEST_DB_PASSWORD }} \
-            app:latest \
-            pytest /app/tests/
+        working-directory: /app
+        run: pytest tests
 
   deploy:
     runs-on: ubuntu-latest
