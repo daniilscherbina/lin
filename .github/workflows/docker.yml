@@ -24,7 +24,6 @@ jobs:
         uses: docker/build-push-action@v6.7.0
         with:
           context: ./docker
-          file: Dockerfile
           target: production
           push: true
           tags: |
@@ -35,7 +34,6 @@ jobs:
         uses: docker/build-push-action@v6.7.0
         with:
           context: ./docker
-          file: Dockerfile
           target: test
           push: true
           tags: |
