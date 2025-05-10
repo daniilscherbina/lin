@@ -12,7 +12,6 @@ RUN pip install --upgrade pip \
 
 FROM base-builder as test-builder
 
-COPY conftest.py ./
 COPY tests ./tests
 
 RUN pip install --user .[test]
