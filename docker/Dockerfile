@@ -23,7 +23,7 @@ FROM python:3.9-slim as test
 
 WORKDIR /app
 
-COPY --from=test-builder /root/.local /root/.local
+COPY --from=test-builder /install /usr/local
 COPY --from=test-builder /app/src ./src
 COPY --from=test-builder /app/tests ./tests
 
@@ -39,7 +39,7 @@ FROM python:3.9-slim as production
 
 WORKDIR /app
 
-COPY --from=base-builder /root/.local /root/.local
+COPY --from=base-builder /install /usr/local
 COPY --from=base-builder /app/src ./src
 
 ENV PATH=/root/.local/bin:$PATH
