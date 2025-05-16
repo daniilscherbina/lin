@@ -37,14 +37,14 @@ jobs:
           target: test
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/app-test:latest-${{ github.sha }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/app-test:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/test:latest-${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/test:latest
 
   test:
     runs-on: ubuntu-latest
     needs: [ build ]
     container:
-      image: deploy320/app-test:latest-${{ github.sha }}
+      image: deploy320/test:latest-${{ github.sha }}
     env:
       DB_HOST: ${{ secrets.TEST_DB_HOST }}
       DB_PORT: ${{ secrets.TEST_DB_PORT }}
