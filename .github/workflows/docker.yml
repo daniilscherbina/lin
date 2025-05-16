@@ -78,6 +78,7 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.REMOTE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.REMOTE_PORT }}
           script: cd tasks/docker && restart.sh ${{ github.sha }}
 
