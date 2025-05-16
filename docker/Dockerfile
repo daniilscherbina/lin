@@ -6,7 +6,7 @@ COPY pyproject.toml ./
 COPY src ./src
 
 RUN pip install --upgrade pip \
-    && pip install --user .
+    && pip install .
 
 
 
@@ -14,7 +14,7 @@ FROM base-builder as test-builder
 
 COPY tests ./tests
 
-RUN pip install --user .[test]
+RUN pip install .[test]
 
 
 
