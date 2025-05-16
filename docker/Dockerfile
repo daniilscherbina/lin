@@ -23,7 +23,8 @@ FROM python:3.10-slim as test
 
 WORKDIR /app
 
-COPY --from=test-builder /usr/local/lib /usr/local/lib
+COPY --from=test-builder /usr/local/lib/python3.10/ /usr/local/lib/python3.10/
+COPY --from=test-builder /usr/local/bin /usr/local/bin
 COPY --from=test-builder /app/src ./src
 COPY --from=test-builder /app/tests ./tests
 
@@ -38,7 +39,8 @@ FROM python:3.10-slim as production
 
 WORKDIR /app
 
-COPY --from=base-builder /usr/local/lib /usr/local/lib
+COPY --from=test-builder /usr/local/lib/python3.10/ /usr/local/lib/python3.10/
+COPY --from=test-builder /usr/local/bin /usr/local/bin
 COPY --from=base-builder /app/src ./src
 
 ENV PYTHONPATH=/app
