@@ -19,7 +19,7 @@ RUN pip install .[test]
 
 
 
-FROM python:3.9-slim as test
+FROM python:3.10-slim as test
 
 WORKDIR /app
 
@@ -34,7 +34,7 @@ CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8083"]
 
 
 
-FROM python:3.9-slim as production
+FROM python:3.10-slim as production
 
 WORKDIR /app
 
