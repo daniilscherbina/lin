@@ -16,6 +16,7 @@ DB_USER=$5        # Пользователь БД
 DB_PASSWORD=$6    # Пароль БД
 
 CONTAINER_NAME="kubsu-container"
+IMAGE="docker.io/deploy320/app:latest-$TAG"
 
 echo "Updating container with tag: $TAG"
 echo "Database connection settings:"
@@ -25,14 +26,14 @@ echo " - DB Name: $DB_NAME"
 echo " - User: $DB_USER"
 
 # 1. Скачиваем новый образ
-docker pull docker.io/deploy320/app:latest-$TAG || { echo "Failed to pull image"; exit 1; }
+podman pull $IMAGE || { echo "Failed to pull image"; exit 1; }
 
 # 2. Останавливаем и удаляем старый контейнер
-docker stop $CONTAINER_NAME || true
-docker rm $CONTAINER_NAME || true
+podman stop $CONTAINER_NAME || true
+podman rm $CONTAINER_NAME || true
 
 # 3. Запускаем новый контейнер с переменными окружения
-docker run -d \
+podman run -d \
   --network host \
   --name $CONTAINER_NAME \
   -e DB_HOST="$DB_HOST" \
@@ -40,6 +41,6 @@ docker run -d \
   -e DB_NAME="$DB_NAME" \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  docker.io/deploy320/app:latest-$TAG || { echo "Failed to start container"; exit 1; }
+  $IMAGE || { echo "Failed to start container"; exit 1; }
 
 echo "✅ Container successfully updated with new image and DB settings"
