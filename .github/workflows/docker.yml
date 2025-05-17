@@ -79,5 +79,12 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.REMOTE_KEY }}
           port: ${{ secrets.REMOTE_PORT }}
-          script: cd tasks/docker && bash restart.sh ${{ github.sha }}
+          script: |
+            cd tasks/docker && \
+            bash restart.sh ${{ github.sha }} \
+              "${{ secrets.PROD_DB_HOST }}" \
+              "${{ secrets.PROD_DB_PORT }}" \
+              "${{ secrets.PROD_DB_NAME }}" \
+              "${{ secrets.PROD_DB_USER }}" \
+              "${{ secrets.PROD_DB_PASSWORD }}"
 
