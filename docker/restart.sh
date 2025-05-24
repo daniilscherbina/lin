@@ -4,13 +4,6 @@
 CONTAINER_NAME="kubsu-container"
 IMAGE="docker.io/deploy320/app:latest"
 
-echo "Updating container with tag"
-echo "Database connection settings:"
-echo " - Host: $DB_HOST"
-echo " - Port: $DB_PORT"
-echo " - DB Name: $DB_NAME"
-echo " - User: $DB_USER"
-
 podman pull $IMAGE || { echo "Failed to pull image"; exit 1; }
 
 podman stop $CONTAINER_NAME || true

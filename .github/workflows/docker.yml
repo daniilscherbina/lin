@@ -81,5 +81,5 @@ jobs:
           port: ${{ secrets.REMOTE_PORT }}
           script: |
             cd tasks/docker && \
-            bash restart.sh ${{ github.sha }}
+            bash restart.sh
 
