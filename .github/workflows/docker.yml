@@ -80,5 +80,5 @@ jobs:
           key: ${{ secrets.REMOTE_KEY }}
           port: ${{ secrets.REMOTE_PORT }}
           script: |
-            bash -c "cd tasks/docker && restart.sh"
+            bash -c "cd tasks/docker && ./restart.sh"
 
