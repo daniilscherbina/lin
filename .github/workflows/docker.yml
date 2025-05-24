@@ -82,5 +82,6 @@ jobs:
           script: |
             cd tasks/docker && \
             bash && \
+            source ~/.bashrc && \
             bash restart.sh
 
