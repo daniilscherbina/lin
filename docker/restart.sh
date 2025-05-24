@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 6 ]; then
-  echo "Usage: $0 <image_tag>
+  echo "Usage: $0 <image_tag>"
   exit 1
 fi
 
