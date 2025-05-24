@@ -27,7 +27,7 @@ jobs:
           target: production
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/app:latest-${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/app:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/app:latest
 
       - name: Build and push test image
@@ -37,7 +37,7 @@ jobs:
           target: test
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/test:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/test:latest-${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/test:latest
 
   test:
