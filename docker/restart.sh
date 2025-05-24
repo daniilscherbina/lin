@@ -1,16 +1,10 @@
 #!/bin/bash
 
-if [ $# -ne 6 ]; then
-  echo "Usage: $0 <image_tag>"
-  exit 1
-fi
-
-TAG=$1 
 
 CONTAINER_NAME="kubsu-container"
-IMAGE="docker.io/deploy320/app:latest-$TAG"
+IMAGE="docker.io/deploy320/app:latest"
 
-echo "Updating container with tag: $TAG"
+echo "Updating container with tag"
 echo "Database connection settings:"
 echo " - Host: $DB_HOST"
 echo " - Port: $DB_PORT"
