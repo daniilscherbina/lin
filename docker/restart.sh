@@ -1,6 +1,8 @@
 #!/bin/bash
 
 
+source ~/.bashrc
+
 CONTAINER_NAME="kubsu-container"
 IMAGE="docker.io/deploy320/app:latest"
 

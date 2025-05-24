@@ -81,7 +81,5 @@ jobs:
           port: ${{ secrets.REMOTE_PORT }}
           script: |
             cd tasks/docker && \
-            bash && \
-            source ~/.bashrc && \
             bash restart.sh
 
